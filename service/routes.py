@@ -60,8 +60,18 @@ def create_accounts():
 ######################################################################
 # LIST ALL ACCOUNTS
 ######################################################################
-
-# ... place you code here to LIST accounts ...
+@app.route("/accounts", methods=["GET"])
+def list_accounts():
+    """
+    List all Accounts
+    This endpoint will list all Accounts
+    """
+    
+    app.logger.info("Request to list Accounts")
+    accounts = Account.all()
+    account_list = [account.serialize() for account in accounts]
+    app.logger.info("Returning [%s] accounts", len(account_list))
+    return jsonify(account_list), status.HTTP_200_OK
 
 
 ######################################################################
@@ -85,14 +95,11 @@ def get_accounts(account_id):
 # UPDATE AN EXISTING ACCOUNT
 ######################################################################
 
-# ... place you code here to UPDATE an account ...
 
 
 ######################################################################
 # DELETE AN ACCOUNT
 ######################################################################
-
-# ... place you code here to DELETE an account ...
 
 
 ######################################################################
